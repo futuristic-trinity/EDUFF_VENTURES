@@ -1,0 +1,29 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+
+    <!-- Players Section -->
+     {% block content %}
+    <section id="players" class=" bg-light py-5">
+        <div class="container">
+            <h2 class="text-center">Featured Players</h2>
+            <div class="row">
+              {% for player in players %}  
+              <div class="col-md-3">
+                   <div class="card display-flex">
+                        <img src="{{ player.profile_image.url }}" class="card-img-top" alt="{{ player.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{player.name}}</h5>
+                            <p class="card-text">{{player.position}}</p>
+                            <a href="{% url 'players:player_detail' player.pk %}" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
+              </div>
+              {% endfor %}
+                <!-- Repeat for more players -->
+            </div>
+        </div>
+      </section>
+      {% endblock %}
+        

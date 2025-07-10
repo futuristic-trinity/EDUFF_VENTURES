@@ -1,0 +1,53 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}Registrations | Eduff Sports{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Trial Registrations</h2>
+
+  {% if registrations %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Position</th>
+            <th>Location</th>
+            <th>Trial Event</th>
+            <th>Passport Photo</th>
+            <th>Submitted At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for registration in registrations %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ registration.full_name }}</td>
+              <td>{{ registration.email }}</td>
+              <td>{{ registration.phone }}</td>
+              <td>{{ registration.preferred_position }}</td>
+              <td>{{ registration.location }}</td>
+              <td>{{ registration.event.title }}</td>
+              <td>
+                {% if registration.passport_photo %}
+                  <img src="{{ registration.passport_photo.url }}" alt="Passport" width="60" class="rounded">
+                {% else %}
+                  <span class="text-muted">No Photo</span>
+                {% endif %}
+              </td>
+              <td>{{ registration.submitted_at|date:"M d, Y H:i" }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-warning">
+      No registrations available for this trial event.
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

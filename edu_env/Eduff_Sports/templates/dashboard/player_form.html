@@ -1,0 +1,63 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block title %}{{ form_title }} Player{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">{{ form_title }} Player</h4>
+        </div>
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="mb-3">
+              {{ form.name.label_tag }} {{ form.name}}
+            </div>
+
+            <div class="mb-3">
+              {{ form.date_of_birth.label_tag }} {{ form.date_of_birth}}
+            </div>
+
+            <div class="mb-3">
+              {{ form.position.label_tag }} {{ form.position}}
+            </div>
+
+            <div class="mb-3">
+              {{ form.profile_image.label_tag}} {{form.profile_image}}
+              {% if form.instance.profile_image %}
+                <img src="{{ form.instance.profile_image.url }}" class="img-thumbnail mt-2" width="100">
+              {% endif %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.video.label_tag}} {{ form.video}}
+              {% if form.instance.video %}
+                <video class="mt-2" width="200" controls>
+                  <source src="{{ form.instance.video.url }}" type="video/mp4">
+                  Your browser does not support video.
+                </video>
+              {% endif %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.description.label_tag}} {{form.description}}
+            </div>
+
+            <div class="text-end">
+              <button type="submit" class="btn btn-success">{{ form_title }}</button>
+              <a href="{% url 'dashboard:player_list' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

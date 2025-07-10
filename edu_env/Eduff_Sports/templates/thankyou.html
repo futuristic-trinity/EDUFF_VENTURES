@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="py-5 bg-light text-center">
+  <div class="container">
+    <div class="alert alert-success shadow-lg p-5 rounded">
+      <h1 class="display-4">Thank You!</h1>
+      <p class="lead mt-3">Your submission has been received successfully.</p>
+      <p class="mt-4">We appreciate your interest in Eduff Sports. We'll get back to you shortly.</p>
+      <a href="{% url 'home' %}" class="btn btn-primary mt-3">Back to Home</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

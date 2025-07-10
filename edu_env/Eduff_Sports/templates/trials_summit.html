@@ -1,0 +1,35 @@
+
+{% extends "base.html"%}
+{% load static %}
+
+{% block title %}Trials & Summits | Eduff Sports{% endblock title %}
+    
+
+{% block content %}
+    <section id="trials-summit" class="py-5 bg-white">
+        <div class="container">
+          <h2 class="text-center mb-5">Upcoming Trials & Summits</h2>
+      
+          <div class="row">
+            <!-- Event Card 1 -->
+             {% for trial in trials %}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card h-100 shadow-sm">
+                <img src="{{trial.banner_image.url}}" class="card-img-top" alt="Event Image">
+                <div class="card-body">
+                  <h5 class="card-title">{{ trial.title }}</h5>
+                  <p class="card-text"><strong>Date:</strong>{{ trial.date|date:"M d, Y" }}</p>
+                  <p class="card-text"><strong>Location:</strong> {{ trial.location }}</p>
+                  <p class="card-text">{{ trial.description }}</p>
+                  <a href="{% url 'trials:register_trial' trial.id %}" class="btn btn-outline-primary btn-sm">Register Now</a>
+                </div>
+              </div>
+            </div>
+             {% empty %}
+             <p class="text-center">No upcoming trials or summits at the moment.</p>
+             {% endfor %}
+          </div>
+        </div>
+      </section>
+{% endblock %}
+      

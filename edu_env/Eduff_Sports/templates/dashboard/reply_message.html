@@ -1,0 +1,17 @@
+{% extends "dashboard_base.html" %}
+{% block title %}Reply to Message | Eduff Sports{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h3>Reply to {{ message.full_name }}</h3>
+  <p><strong>Email:</strong> {{ message.email }}</p>
+  <p><strong>Original Message:</strong><br>{{ message.message }}</p>
+
+  <form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Send Email</button>
+    <a href="{% url 'dashboard:messages' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

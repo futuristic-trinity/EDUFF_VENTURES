@@ -1,0 +1,41 @@
+{% extends 'dashboard_base.html' %}
+{% block title %}Dashboard Overview{% endblock %}
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Dashboard Overview</h2>
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="card text-white bg-primary">
+        <div class="card-body">
+          <h5 class="card-title">Players</h5>
+          <p class="card-text display-6">{{ player_count }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-success">
+        <div class="card-body">
+          <h5 class="card-title">Trials</h5>
+          <p class="card-text display-6">{{ trial_count }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body">
+          <h5 class="card-title">Gallery Images</h5>
+          <p class="card-text display-6">{{ gallery_count }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white bg-danger">
+        <div class="card-body">
+          <h5 class="card-title">Messages</h5>
+          <p class="card-text display-6">{{ message_count }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

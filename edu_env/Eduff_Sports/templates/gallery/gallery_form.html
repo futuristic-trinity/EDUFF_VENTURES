@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="card shadow-lg p-4">
+      <h2 class="text-center mb-4">
+        {% if form.instance.pk %}
+          Update Gallery Image
+        {% else %}
+          Add New Gallery Image
+        {% endif %}
+      </h2>
+
+      <form method="post" enctype="multipart/form-data" class="row g-4">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="col-md-12">
+          <label for="{{ form.title.id_for_label }}" class="form-label">Title</label>
+          {{ form.title|add_class:"form-control" }}
+        </div>
+
+        <div class="col-md-12">
+          <label for="{{ form.image.id_for_label }}" class="form-label">Image</label>
+          {{ form.image|add_class:"form-control" }}
+        </div>
+
+        {% if form.instance.pk and form.instance.image %}
+        <div class="col-md-12 text-center">
+          <p>Current Image:</p>
+          <img src="{{ form.instance.image.url }}" alt="{{ form.instance.title }}" class="img-fluid rounded shadow-sm" style="max-height: 250px;">
+        </div>
+        {% endif %}
+
+        <div class="col-12 text-center">
+          <a href="{% url 'manager:gallery-list' %}" class="btn btn-secondary me-3">Cancel</a>
+          <button type="submit" class="btn btn-primary">
+            {% if form.instance.pk %}Update{% else %}Add{% endif %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

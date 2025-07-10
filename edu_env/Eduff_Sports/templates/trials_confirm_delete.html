@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="card shadow p-4">
+      <h2 class="text-center text-danger mb-4">Confirm Delete</h2>
+      <p class="text-center">Are you sure you want to delete the trial: <strong>{{ object.title }}</strong> scheduled on <strong>{{ object.date|date:"F j, Y" }}</strong>?</p>
+      
+      <form method="post" class="text-center mt-4">
+        {% csrf_token %}
+        <a href="{% url 'dashboard:trial_list' %}" class="btn btn-secondary me-3">Cancel</a>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

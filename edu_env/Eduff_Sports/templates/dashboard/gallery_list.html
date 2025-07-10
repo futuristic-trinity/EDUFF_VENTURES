@@ -1,0 +1,44 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block title %}Gallery Management{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>Gallery Images</h3>
+    <a href="{% url 'dashboard:add_image' %}" class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i> Add Image
+    </a>
+  </div>
+
+  <div class="row">
+    {% for image in images %}
+      <div class="col-md-4 col-lg-3 mb-4">
+        <div class="card shadow-sm h-100">
+          <img src="{{ image.image.url }}" class="card-img-top img-fluid" alt="Gallery Image">
+          <div class="card-body text-center">
+            <h6 class="card-title">{{ image.title|default:"Untitled" }}</h6>
+            <small class="text-muted">Uploaded: {{ image.uploaded_at|date:"M d, Y" }}</small>
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <a href="#" class="btn btn-sm btn-warning">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <form method="POST" action="{% url 'dashboard:delete_image' image.id %}" onsubmit="return confirm('Are you sure you want to delete this image?')">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-sm btn-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12 text-center">
+        <p class="text-muted">No images uploaded yet.</p>
+      </div>
+  {% endfor %}
+  </div>
+</div>
+{% endblock content %}

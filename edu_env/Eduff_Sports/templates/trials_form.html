@@ -1,0 +1,32 @@
+# trials/templates/trials/trial_form.html
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-4">{{ form.instance.pk|yesno:"Edit Trial,Add New Trial" }}</h2>
+    <form method="post" enctype="multipart/form-data" class="row g-4 shadow p-4 bg-white rounded">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="col-md-6">
+        {{ form.title.label_tag }} {{ form.title }}
+      </div>
+      <div class="col-md-6">
+        {{ form.date.label_tag }} {{ form.date }}
+      </div>
+      <div class="col-md-6">
+        {{ form.location.label_tag }} {{ form.location }}
+      </div>
+      <div class="col-md-12">
+        {{ form.description.label_tag }} {{ form.description }}
+      </div>
+
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary px-5">Save</button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

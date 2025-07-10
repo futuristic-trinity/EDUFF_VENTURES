@@ -1,0 +1,58 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block title %}Manage Trials & Summits{% endblock title %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Upcoming Trials & Summits</h4>
+    <a href="{% url 'dashboard:trial_create' %}" class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i> Add New Trial
+    </a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Banner</th>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Registrations</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for trial in trials %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>
+            <img src="{{ trial.banner_image.url }}" class="img-thumbnail" style="width: 100px; height: 60px;" alt="Banner">
+          </td>
+          <td>{{ trial.title }}</td>
+          <td>{{ trial.date }}</td>
+          <td>{{ trial.location }}</td>
+          <td>
+            <a href="{% url 'dashboard:registration_list' trial.id %}" class="btn btn-outline-info btn-sm">
+              {{ trial.registrations.count }} View
+            </a>
+          </td>
+          <td>
+            <a href="{% url 'dashboard:edit_trial' trial.id %}" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+            <a href="{% url 'dashboard:delete_trial' trial.id %}" class="btn btn-sm btn-danger"
+               onclick="return confirm('Are you sure you want to delete this trial?');"><i class="bi bi-trash"></i></a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="7" class="text-center text-muted">No trials or summits available.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

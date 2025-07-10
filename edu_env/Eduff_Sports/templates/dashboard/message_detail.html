@@ -1,0 +1,31 @@
+{% extends 'dashboard_base.html' %}
+
+{% block title %}Contact Message Details | Eduff Sports{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Message Details</h2>
+
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title"><strong>Subject:</strong> {{ message.subject }}</h5>
+      <p><strong>From:</strong> {{ message.full_name }}</p>
+      <p><strong>Email:</strong> <a href="mailto:{{ message.email }}">{{ message.email }}</a></p>
+      <p><strong>Received on:</strong> {{ message.created_at|date:"M d, Y - H:i A" }}</p>
+
+      <hr>
+      <p><strong>Message:</strong></p>
+      <p>{{ message.message|linebreaks }}</p>
+    </div>
+  </div>
+
+  <div class="d-flex gap-3">
+    <a href="{% url 'dashboard:messages' %}" class="btn btn-secondary">⬅ Back to Messages</a>
+    <a href="{% url 'dashboard:reply_message' message.pk %}" class="btn btn-outline-success btn-sm">Reply</a>
+    <form method="post" action="{% url 'dashboard:delete_message' message.pk %}" onsubmit="return confirm('Are you sure you want to delete this message?');">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">🗑 Delete</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+
+{% extends "base.html"%}
+{% load static %}
+{% block content %}
+<section id="gallery" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Gallery</h2>
+      <div class="owl-carousel owl-theme">
+        {% for image in galleries %}
+        <div class="item">
+          <div class="card">
+            <img src="{{ image.image.url }}" class="card-img-top" alt="{{ image.title|default:'Gallery image' }}">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ image.title }}</h5>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+                <p class="text-center">No images yet. Check back soon!</p>
+        {% endfor %}
+
+      </div>
+    </div>
+</section>
+{% endblock %}
+
+
+{% block extra_js %}
+<script>
+    $(function () {
+        $('.owl-carousel').owlCarousel({
+            items: 4,
+            loop: true,
+            margin: 24,
+            nav: true,
+            dots: false,
+            responsive:{
+                0:   { items: 1 },
+                768: { items: 2 },
+                992: { items: 3 },
+                1200:{ items: 4 }
+            }
+        });
+    });
+</script>
+{% endblock %}

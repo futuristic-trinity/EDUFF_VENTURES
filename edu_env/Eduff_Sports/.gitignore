@@ -1,0 +1,74 @@
+# =====================================
+# Django Project: eduff_sports
+# Using PostgreSQL
+# =====================================
+
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+edu_env/
+
+# Django database settings (local SQLite, not used but safe to ignore)
+*.sqlite3
+*.db
+
+# Environment variables
+.env
+.env.*
+
+# Media and uploaded files
+/media/
+uploads/
+*.log
+
+# Static files (collected for production)
+staticfiles/
+static/
+
+# Django migration artifacts (you can keep if versioning, but often ignored early on)
+*.pot
+
+# Local configuration
+*.local
+*.env
+
+# PostgreSQL dump or backups (if any)
+*.pgsql
+*.sql
+*.dump
+
+# IDE/editor config files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Testing and build artifacts
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Node modules (if you use any frontend framework)
+node_modules/
+
+# Gunicorn/PID files (for production)
+*.pid
