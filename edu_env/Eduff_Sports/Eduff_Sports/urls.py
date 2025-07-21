@@ -31,6 +31,7 @@ urlpatterns = [
     path('gallery/', include('gallery.urls')),
     path('players/', include('players.urls', namespace='players')),
     path('trials/', include('trials.urls', namespace='trials')),
+    path('news/', include('news.urls', namespace='news')),
     
 ]
 

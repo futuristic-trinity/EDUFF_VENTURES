@@ -6,5 +6,5 @@ from .models import Player
 
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'date_of_birth', 'upi', 'position', 'profile_image' , 'video', 'created_at')
+    list_display = ('surname', 'first_name', 'date_of_birth', 'upi', 'position', 'profile_image' , 'video', 'created_at')
     search_fields = ('name', 'position')

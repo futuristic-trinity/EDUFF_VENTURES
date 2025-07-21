@@ -14,7 +14,7 @@
                    <div class="card display-flex">
                         <img src="{{ player.profile_image.url }}" class="card-img-top" alt="{{ player.name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{player.name}}</h5>
+                            <h5 class="card-title">{{player.surname}} {{player.first_name}}</h5>
                             <p class="card-text">{{player.position}}</p>
                             <a href="{% url 'players:player_detail' player.pk %}" class="btn btn-primary">View Profile</a>
                         </div>

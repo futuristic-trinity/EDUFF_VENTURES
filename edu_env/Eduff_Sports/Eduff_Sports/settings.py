@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'trials',
     'gallery',
     'dashboard',
+    'news',
     #crispy_forms
     'crispy_forms',
     'crispy_bootstrap5',

@@ -3,6 +3,8 @@ from django.views.generic import TemplateView
 from players.models import Player
 from trials.models import TrialEvent
 from gallery.models import GalleryImage
+from news.models import NewsPost
+
 
 class HomePageView(TemplateView):
     template_name = 'index.html'
@@ -12,6 +14,7 @@ class HomePageView(TemplateView):
         context['players'] = Player.objects.all()
         context['trials'] = TrialEvent.objects.all()
         context['galleries'] = GalleryImage.objects.all()
+        context["latest_news"] = NewsPost.objects.order_by("-created_at")[:4]
         return context
 
 

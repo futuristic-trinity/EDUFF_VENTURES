@@ -3,7 +3,7 @@ from trials.models import TrialEvent
 class TrialEventForm(forms.ModelForm):
     class Meta:
         model = TrialEvent
-        fields = ['title', 'location', 'date', 'description', 'banner_image', 'registration_link']
+        fields = ['title', 'location', 'start_date', 'end_date', 'description', 'banner_image', 'registration_link']
 
 
 

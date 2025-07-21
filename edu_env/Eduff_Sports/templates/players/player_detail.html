@@ -10,7 +10,7 @@
           <img src="{{ player.profile_image.url }}" class="card-img-top img-fluid" alt="{{ player.name }}">
 
         <div class="card-body">
-          <h3 class="card-title">{{ player.name }}</h3>
+          <h3 class="card-title">{{ player.surname }} {{player.first_name}}</h3>
           <p><strong>Date of Birth:</strong> {{ player.date_of_birth|date:"F j, Y" }}</p>
           <p><strong>Position:</strong> {{ player.position }}</p>
             <p><strong>Bio:</strong> {{ player.description }}</p>

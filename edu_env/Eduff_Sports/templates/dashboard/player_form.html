@@ -17,7 +17,10 @@
             {{ form.non_field_errors }}
 
             <div class="mb-3">
-              {{ form.name.label_tag }} {{ form.name}}
+              {{ form.surname.label_tag }} {{ form.surname}}
+            </div>
+            <div class="mb-3">
+              {{ form.first_name.label_tag }} {{ form.first_name}}
             </div>
 
             <div class="mb-3">
@@ -50,7 +53,7 @@
             </div>
 
             <div class="text-end">
-              <button type="submit" class="btn btn-success">{{ form_title }}</button>
+              <button type="submit" class="btn btn-success">Save</button>
               <a href="{% url 'dashboard:player_list' %}" class="btn btn-secondary">Cancel</a>
             </div>
 

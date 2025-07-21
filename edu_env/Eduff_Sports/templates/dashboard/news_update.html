@@ -1,0 +1,6 @@
+{% extends 'dashboard_base.html' %}
+{% block content %}
+<h2>{% if object %}Update{% else %}Add{% endif %} News</h2>
+<form method="post" enctype="multipart/form-data">{% csrf_token %}{{ form.as_p }}<button type="submit" class="btn btn-success">Save</button></form>
+<a href="{% url 'news:news_list' %}" class="btn btn-secondary">Back</a>
+{% endblock %}

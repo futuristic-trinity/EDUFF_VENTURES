@@ -6,8 +6,8 @@ from .models import TrialEvent,TrialRegistration
 
 @admin.register(TrialEvent)
 class TrialEventadmin(admin.ModelAdmin):
-    list_display = ('title', 'registration_link', 'location', 'date')
-    search_fields = ('title', 'date')
+    list_display = ('title', 'registration_link', 'location', 'start_date', 'end_date')
+    search_fields = ('title', 'start_date')
 
 
 @admin.register(TrialRegistration)

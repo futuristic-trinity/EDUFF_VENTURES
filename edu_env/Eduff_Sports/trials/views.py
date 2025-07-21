@@ -13,7 +13,7 @@ class TrialListView( ListView):
     model = TrialEvent
     template_name = 'trials_summit.html'
     context_object_name = 'trials'
-    ordering = ['-date']
+    ordering = ['-start_date']
 
 class TrialDetailView(ManagerRequiredMixin, DetailView):
     model = TrialEvent

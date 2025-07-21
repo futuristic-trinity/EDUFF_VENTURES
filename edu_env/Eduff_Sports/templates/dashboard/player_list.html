@@ -16,7 +16,7 @@
         <thead class="table-dark">
           <tr>
             <th>Image</th>
-            <th>Name</th>
+            <th>Full_Name</th>
             <th>Position</th>
             <th>UPI</th>
             <th>Date of Birth</th>
@@ -29,7 +29,7 @@
             <td>
               <img src="{{ player.profile_image.url }}" alt="Image" class="img-thumbnail" style="width: 60px; height: 60px;">
             </td>
-            <td>{{ player.name }}</td>
+            <td>{{ player.surname }} {{ player.first_name }}</td>
             <td>{{ player.position }}</td>
             <td>{{ player.upi }}</td>
             <td>{{ player.date_of_birth }}</td>

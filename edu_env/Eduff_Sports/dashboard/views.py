@@ -29,7 +29,7 @@ class PlayerListView(LoginRequiredMixin, ListView):
 
 class PlayerCreateView(LoginRequiredMixin, CreateView):
     model = Player
-    fields = ['name', 'date_of_birth', 'position', 'profile_image', 'video', 'description']
+    fields = ['surname', 'first_name', 'date_of_birth', 'position', 'profile_image', 'video', 'description']
     template_name = 'dashboard/player_form.html'
     success_url = reverse_lazy('dashboard:player_list')
 
@@ -76,7 +76,7 @@ class TrialCreateView(LoginRequiredMixin, CreateView):
 class TrialUpdateView(LoginRequiredMixin, UpdateView):
     model = TrialEvent
     fields = '__all__'
-    template_name = 'dashboard/trial_form.html'
+    template_name = 'dashboard/trials_form.html'
     success_url = reverse_lazy('dashboard:trial_list')
 
 class TrialDeleteView(LoginRequiredMixin, DeleteView):

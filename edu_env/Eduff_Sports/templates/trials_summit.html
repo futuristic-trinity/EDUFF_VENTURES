@@ -18,8 +18,10 @@
                 <img src="{{trial.banner_image.url}}" class="card-img-top" alt="Event Image">
                 <div class="card-body">
                   <h5 class="card-title">{{ trial.title }}</h5>
-                  <p class="card-text"><strong>Date:</strong>{{ trial.date|date:"M d, Y" }}</p>
+                  <p class="card-text"><strong>Open registration:</strong>{{ trial.start_date|date:"M d, Y" }}</p>
+                  <p class="card-text"><strong>Deadline:</strong>{{ trial.end_date|date:"M d, Y" }}</p>
                   <p class="card-text"><strong>Location:</strong> {{ trial.location }}</p>
+                  <p class="card-text"><strong>Fees(GH₵):</strong> {{ trial.register_fees }}</p>
                   <p class="card-text">{{ trial.description }}</p>
                   <a href="{% url 'trials:register_trial' trial.id %}" class="btn btn-outline-primary btn-sm">Register Now</a>
                 </div>

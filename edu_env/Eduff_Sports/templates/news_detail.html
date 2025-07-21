@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class=" bg-light py-5 text-center ">
+    <div class="container">
+    <h2>{{ object.title }}</h2>
+    {% if object.image %}
+    <img src="{{ object.image.url }}" alt="{{ object.title }}" style="width:300px;">
+    {% endif %}
+    <p>{{ object.content }}</p>
+    {% if object.source_url %}<p>Source: <a href="{{ object.source_url }}">External Link</a></p>{% endif %}
+    <p><strong>{{ object.created_at|date:"F d, Y H:i" }}</strong></p>
+    </div>
+</section>
+{% endblock %}
