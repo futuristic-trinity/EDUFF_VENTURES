@@ -6,7 +6,7 @@
     {%block content %}
       <section id="register-form" class="py-5 bg-light">
               <div class="container">
-                <h2 class="text-center mb-4">Register for Trials or Summit</h2>
+                <h2 class="text-center mb-4">Register for {{ registration.event.title }}</h2>
                   <form method="post" enctype="multipart/form-data" class="shadow-lg p-4 bg-white rounded w-75 mx-auto">
                     {% csrf_token %}
 

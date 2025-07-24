@@ -19,6 +19,7 @@
             <th>Trial Event</th>
             <th>Passport Photo</th>
             <th>Submitted At</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -39,6 +40,20 @@
                 {% endif %}
               </td>
               <td>{{ registration.submitted_at|date:"M d, Y H:i" }}</td>
+              <td>
+                  {% if registration.status == 'pending' %}
+                  <form method="post" action="{% url 'dashboard:registration_approve' registration.pk %}" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-success btn-sm">Approve</button>
+                  </form>
+                  <form method="post" action="{% url 'dashboard:registration_reject' registration.pk %}" style="display:inline;">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-danger btn-sm">Reject</button>
+                  </form>
+                  {% else %}
+                      {{ registration.status|title }}
+                  {% endif %}
+              </td>
             </tr>
           {% endfor %}
         </tbody>

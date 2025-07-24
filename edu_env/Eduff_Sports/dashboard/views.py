@@ -93,6 +93,85 @@ class RegistrationListView(ListView):
     def get_queryset(self):
         trial_id = self.kwargs.get('trial_id')
         return TrialRegistration.objects.filter(event__id=trial_id)
+    
+#registrations approval
+from django.views import View
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
+from trials.models import TrialRegistration
+from django.core.mail import send_mail, BadHeaderError
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+
+class ApproveRegistrationView(View):
+    def post(self, request, pk, *args, **kwargs):
+        registration = get_object_or_404(TrialRegistration, pk=pk)
+
+        # Send email
+        try:
+            validate_email(registration.email)
+            send_mail(
+                subject='Trial Registration Approved',
+                message='Your trial registration has been approved. You will be contacted shortly to complete payment.',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[registration.email],
+                fail_silently=False,
+            )
+        except ValidationError:
+            messages.error(request, "Invalid email address. Could not send notification.")
+            return redirect('dashboard:registration_list',trial_id=registration.event.id)
+        except BadHeaderError:
+            messages.error(request, "Invalid header found.")
+            return redirect('dashboard:registration_list',trial_id=registration.event.id)
+        except Exception as e:
+            messages.error(request, f"Email send failed: {str(e)}")
+            return redirect('dashboard:registration_list',trial_id=registration.event.id)
+
+
+
+
+        registration.status = 'approved'
+        registration.save()
+        messages.success(request, f"{registration.full_name}'s registration approved.")
+        return redirect('dashboard:registration_list', trial_id=registration.event.id)
+
+class RejectRegistrationView(View):
+    def post(self, request, pk, *args, **kwargs):
+        registration = get_object_or_404(TrialRegistration, pk=pk)
+
+        # Send email
+        try:
+            validate_email(registration.email)
+            send_mail(
+                subject='Trial Registration Rejected',
+                message=(
+                    f"Dear {registration.full_name},\n\n"
+                    f"Your registration for '{registration.event.title}' has been rejected.\n"
+                    "For any inquiries, please contact the event manager.\n"
+                    "via whatsapp: +233-0248945288 or Call: +233-0543834753 "
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[registration.email],
+                fail_silently=False,
+            )
+        except ValidationError:
+            messages.error(request, "Invalid email address. Could not send notification.")
+            return redirect('dashboard:registration_list',trial_id=registration.event.id)
+        except BadHeaderError:
+            messages.error(request, "Invalid header found.")
+            return redirect('dashboard:registration_list',trial_id=registration.event.id)
+        except Exception as e:
+            messages.error(request, f"Email send failed: {str(e)}")
+            return redirect('dashboard:registration_list',trial_id=registration.event.id)
+
+
+        registration.status = 'rejected'
+        registration.save()
+        messages.warning(request, f"{registration.full_name}'s registration rejected.")
+        return redirect('dashboard:registration_list', trial_id=registration.event.id)
+
 
 # Contact Messages
 class MessageListView(LoginRequiredMixin, ListView):

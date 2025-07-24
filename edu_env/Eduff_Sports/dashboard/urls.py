@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import ApproveRegistrationView, RejectRegistrationView
 
 app_name = 'dashboard'
 
@@ -25,6 +26,9 @@ urlpatterns = [
 
     # Registrations
     path('registrations/<int:trial_id>/', views.RegistrationListView.as_view(), name='registration_list'),
+    path('registrations/<int:pk>/approve/', ApproveRegistrationView.as_view(), name='registration_approve'),
+    path('registrations/<int:pk>/reject/', RejectRegistrationView.as_view(), name='registration_reject'),
+    
 
     # Contact Messages
     path('messages/', views.MessageListView.as_view(), name='messages'),
@@ -34,3 +38,5 @@ urlpatterns = [
     #reply messages
     path('messages/<int:pk>/reply/', views.ReplyMessageView.as_view(), name='reply_message'),
 ]
+
+
