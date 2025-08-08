@@ -103,12 +103,7 @@ DATABASES = {
     'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://postgres:%40TECHPROHET@localhost:5432/eduff_sports',
-        conn_max_age=600
-    )
-}
+
 
 AUTH_USER_MODEL="accounts.CustomUser"
 LOGIN_URL = 'accounts:manager_login'
