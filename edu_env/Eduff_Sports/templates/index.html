@@ -78,7 +78,6 @@
 
      <!-- Leagues & Summits Section -->
      
-  
     <section id="trials-summit" class="py-5 bg-white">
         <div class="container">
           <h2 class="text-center mb-5">Upcoming Trials & Summits</h2>
@@ -103,24 +102,25 @@
              {% endfor %}
           </div>
         </div>
-      </section>
+      </section> 
+      <!-- summits section ends -->
 
-
+    <!-- news section -->
     <section class="news-section my-5 bg-white">
-  <h3>Latest Sports News</h3>
-  <div class="row">
-    {% for news in latest_news %}
-      <div class="col-md-6 mb-3">
-        <div class="border p-3">
-          <h5 class="card-title">{{ news.title }}</h5>
-          <img src="{{ news.image.url }}" alt="{{ object.title }}" style="width:300px;">
-          <p class="text-muted">{{ news.created_at|date:"d M Y" }}</p>
-          <a href="{% url 'news:news_detail' news.pk %}" class="btn btn-sm btn-outline-primary">Read more</a>
-        </div>
+      <h3 class="text-center mb-5" >Latest Sports News</h3>
+      <div class="row">
+        {% for news in latest_news %}
+          <div class="col-md-6 mb-3">
+            <div class="border p-3">
+              <h5 class="card-title">{{ news.title }}</h5>
+              <img src="{{ news.image.url }}" alt="{{ object.title }}" style="width:300px;">
+              <p class="text-muted">{{ news.created_at|date:"d M Y" }}</p>
+              <a href="{% url 'news:news_detail' news.pk %}" class="btn btn-sm btn-outline-primary">Read more</a>
+            </div>
+          </div>
+        {% endfor %}
       </div>
-    {% endfor %}
-  </div>
-</section>
+    </section>
 
    
     

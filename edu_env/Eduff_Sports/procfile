@@ -1,0 +1,1 @@
+web: gunicorn Eduff_Sports.wsgi:application

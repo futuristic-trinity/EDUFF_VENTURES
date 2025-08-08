@@ -35,7 +35,7 @@ class PlayerCreateView(LoginRequiredMixin, CreateView):
 
 class PlayerUpdateView(LoginRequiredMixin, UpdateView):
     model = Player
-    fields = ['name', 'date_of_birth', 'position', 'profile_image', 'video', 'description']
+    fields = '__all__'
     template_name = 'dashboard/player_form.html'
     success_url = reverse_lazy('dashboard:player_list')
 

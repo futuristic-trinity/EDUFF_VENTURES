@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import TrialEvent, TrialRegistration
 from .forms import TrialRegistrationForm
 from django.urls import reverse, reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+#from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.mixins import ManagerRequiredMixin
 
 # === public view ===

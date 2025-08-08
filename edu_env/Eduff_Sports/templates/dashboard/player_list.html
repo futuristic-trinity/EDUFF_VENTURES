@@ -12,7 +12,7 @@
 
   <div class="card shadow">
     <div class="card-body table-responsive">
-      <table class="table table-hover table-bordered align-middle">
+      <table class="table table-hover table-striped table-bordered align-middle">
         <thead class="table-dark">
           <tr>
             <th>Image</th>
@@ -34,8 +34,10 @@
             <td>{{ player.upi }}</td>
             <td>{{ player.date_of_birth }}</td>
             <td>
-              <a href="{% url 'dashboard:edit_player' player.id %}" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a>
-              <a href="{% url 'dashboard:delete_player' player.id %}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+              <div class="btn-group">
+                <a href="{% url 'dashboard:edit_player' player.id %}" class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></a>
+                <a href="{% url 'dashboard:delete_player' player.id %}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+              </div>
             </td>
           </tr>
           {% empty %}

@@ -16,8 +16,8 @@
     {% for image in images %}
       <div class="col-md-4 col-lg-3 mb-4">
         <div class="card shadow-sm h-100">
-          <img src="{{ image.image.url }}" class="card-img-top img-fluid" alt="Gallery Image">
-          <div class="card-body text-center">
+          <img src="{{ image.image.url }}" class="card-img-top img-fluid rounded " alt="Gallery Image">
+          <div class="card-body p-2 text-center">
             <h6 class="card-title">{{ image.title|default:"Untitled" }}</h6>
             <small class="text-muted">Uploaded: {{ image.uploaded_at|date:"M d, Y" }}</small>
           </div>

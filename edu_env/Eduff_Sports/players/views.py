@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, UpdateView, CreateView, DeleteView
 from .models import Player
-from django.contrib.auth.mixins import LoginRequiredMixin
+#from django.contrib.auth.mixins import LoginRequiredMixin
 from accounts.mixins import ManagerRequiredMixin 
 
 # Create your views here.

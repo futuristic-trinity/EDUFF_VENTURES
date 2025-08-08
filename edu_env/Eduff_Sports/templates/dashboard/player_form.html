@@ -12,7 +12,7 @@
           <h4 class="mb-0">{{ form_title }} Player</h4>
         </div>
         <div class="card-body">
-          <form method="POST" enctype="multipart/form-data">
+          <form method="POST" enctype="multipart/form-data" class="bg-white p-4 shadow-sm rounded">
             {% csrf_token %}
             {{ form.non_field_errors }}
 

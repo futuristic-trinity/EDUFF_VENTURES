@@ -1,0 +1,20 @@
+asgiref==3.8.1
+click==8.2.1
+colorama==0.4.6
+crispy-bootstrap5==2025.6
+dj-database-url==3.0.1
+Django==5.2.1
+django-bootstrap5==25.1
+django-crispy-forms==2.4
+gunicorn==23.0.0
+h11==0.16.0
+packaging==25.0
+pillow==11.2.1
+psycopg2==2.9.10
+python-decouple==3.8
+sqlparse==0.5.3
+tzdata==2025.2
+uvicorn==0.35.0
+whitenoise==6.9.0
+# Development-only script
+run_server.py

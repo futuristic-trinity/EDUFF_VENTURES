@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xfpl4vwop8*&f0(avpym&)%3qv^#i39c95#bq9%jj(m1^@pdu_'
+#SECRET_KEY = 'django-insecure-xfpl4vwop8*&f0(avpym&)%3qv^#i39c95#bq9%jj(m1^@pdu_'
 
+
+#SECRET_KEY = config("SECRET_KEY")
+#DEBUG = config("DEBUG", default=False, cast=bool)
+
+
+#ALLOWED_HOSTS = []
+SECRET_KEY = os.environ.get('SECRET_KEY', 'unsafe-secret-key')  
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config("DJANGO_ALLOWED_HOSTS").split(",")
 
 
 # Application definition
@@ -54,6 +63,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -85,15 +95,19 @@ WSGI_APPLICATION = 'Eduff_Sports.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
+
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME':  'postgres',
-        'USER': 'postgres',
-        'PASSWORD': '@TECHPROHET',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
+}
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://postgres:%40TECHPROHET@localhost:5432/eduff_sports',
+        conn_max_age=600
+    )
 }
 
 AUTH_USER_MODEL="accounts.CustomUser"
@@ -148,12 +162,24 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
+#serving static files during production
+#STATIC_ROOT = BASE_DIR / "staticfiles"
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# This production code might break development mode, so we check whether we're in DEBUG mode
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+#using crispy forms 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
@@ -161,14 +187,32 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 ### EMAIL SETUP ##########
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'fredcomputing@gmail.com'
-EMAIL_HOST_PASSWORD = 'crxy syjp xrmv npwq'
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'fredcomputing@gmail.com'
+
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = config("EMAIL_PORT", cast=int)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# production settings
+#import dj_database_url
+from django.contrib.messages import constants as messages
+
+if not DEBUG:
+    ALLOWED_HOSTS += ['.onrender.com']
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True

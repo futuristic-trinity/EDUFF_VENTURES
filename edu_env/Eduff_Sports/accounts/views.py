@@ -11,7 +11,7 @@ from players.models import Player
 
 
 class ManagerDashboardView(ManagerRequiredMixin, TemplateView):
-    template_name = 'dashboard.html'
+    template_name = 'dashboard_base.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

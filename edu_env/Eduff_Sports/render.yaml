@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: Eduff_Sports
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn Eduff_Sports.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: Eduff_Sports.settings
+      - key: SECRET_KEY
+        value: SECRET_KEY
+      - key: EMAIL_HOST_PASSWORD
+        value: crxy syjp xrmv npwq
+      - key: DEBUG
+        value: False
