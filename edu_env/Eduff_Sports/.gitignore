@@ -22,13 +22,13 @@ edu_env/
 .env.*
 
 # Media and uploaded files
-/media/
-uploads/
+#/media/
+#uploads/
 *.log
 
 # Static files (collected for production)
-staticfiles/
-static/
+#staticfiles/
+#static/
 
 # Django migration artifacts (you can keep if versioning, but often ignored early on)
 *.pot

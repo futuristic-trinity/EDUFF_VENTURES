@@ -1,0 +1,113 @@
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background-color: #343a40;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: all 0.3s;
+}
+
+.sidebar .nav-link {
+  color: #adb5bd;
+  padding: 10px 20px;
+  font-weight: 500;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #495057;
+  color: #fff;
+}
+
+.sidebar h4 {
+  padding-left: 20px;
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+  transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: relative;
+    min-height: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+/* Navbar */
+.navbar {
+  border-radius: 8px;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+}
+
+/* Forms */
+form input,
+form select,
+form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+form button {
+  width: 100%;
+}
+
+/* Responsive Tables */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+/* Toasts */
+.toast-container {
+  z-index: 1055;
+}
+
+/* Responsive Images */
+img,
+.video-responsive {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 5px;
+}
+
+.btn-danger,
+.btn-outline-danger {
+  transition: 0.3s;
+}
+
+/* Add smooth transition for content changes */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f1f3f5;
+}
+
+/* Adjust spacing inside the main content */
+.main-content > *:not(nav) {
+  padding: 10px 0;
+}
